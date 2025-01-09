@@ -7,11 +7,15 @@ import {
 import express from 'express';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {AppDataSource} from './backend/db/data-source';
 
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
 const app = express();
+
+await AppDataSource.initialize()
+
 const angularApp = new AngularNodeAppEngine();
 
 /**
